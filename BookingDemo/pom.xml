@@ -23,6 +23,18 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<dependencyManagement>
+	    	<dependencies>
+	      		<dependency>
+	        		<groupId>software.amazon.awssdk</groupId>
+			        <artifactId>bom</artifactId>
+			        <version>${aws.java.sdk.version}</version>
+			        <type>pom</type>
+			        <scope>import</scope>
+	     		</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -41,13 +53,31 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<dependency>
-		        <groupId>software.amazon.awssdk</groupId>
-		        <artifactId>bom</artifactId>
-		        <version>${aws.java.sdk.version}</version>
-		        <type>pom</type>
-		        <scope>import</scope>
-     		</dependency>
+	       <dependency>
+	            <groupId>software.amazon.awssdk</groupId>
+	            <artifactId>s3</artifactId>
+	            <exclusions>
+	                <exclusion>
+	                    <groupId>software.amazon.awssdk</groupId>
+	                    <artifactId>netty-nio-client</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>software.amazon.awssdk</groupId>
+	                    <artifactId>apache-client</artifactId>
+	                </exclusion>
+	            </exclusions>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>software.amazon.awssdk</groupId>
+	            <artifactId>url-connection-client</artifactId>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>com.amazonaws</groupId>
+	            <artifactId>aws-lambda-java-core</artifactId>
+	            <version>${aws.lambda.java.version}</version>
+	        </dependency>
 
 	        <dependency>
 	            <groupId>com.h2database</groupId>
